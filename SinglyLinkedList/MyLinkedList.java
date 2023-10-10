@@ -1,3 +1,4 @@
+package SinglyLinkedList;
 public class MyLinkedList {
     private Node head;
 
@@ -71,6 +72,7 @@ public class MyLinkedList {
         }
         n.setNext(null);;
     }
+
     //deleteAtIndex
     public void deleteAtIndex(int index){
         if(index == 0){
@@ -176,7 +178,51 @@ public class MyLinkedList {
         return n.getData();
     }
 
+    public int getLength(){
+        if(head == null){
+            return 0;
+        }
+        int count = 0;
+        Node n = head;
+        while(n!=null){
+            count++;
+            n = n.getNext();
+        }
+        return count;
+    }
 
+    //reverse nodes
+    public void reverse(){
+        if(head == null){
+            return;
+        }
+
+        Node current = head;
+        Node previous = null;
+        Node next = null;
+
+        while(current != null){
+            next = current.getNext();
+            current.setNext(previous);
+            previous = current;
+            current = next;
+        }
+
+        head = previous;
+    }
+
+    //find middle node
+    public int getMiddleNode(){
+        if(head == null){
+            return -1;
+        }
+
+        int len = getLength();
+        len = len/2;
+
+        return getDataAtIndex(len);
+
+    }
 
     //show
     public void show(){
@@ -185,11 +231,13 @@ public class MyLinkedList {
         }
 
         Node n = head;
+        // System.out.print(n.getData());
         while(n.getNext()!=null){
-            System.out.print(n.getData() + " ");
+            System.out.print(n.getData());
+            System.out.print("-->");
             n = n.getNext();
         }
-        System.out.println(n.getData());
+        System.out.println(n.getData() + "-->" + n.getNext());
     }
 
 }
