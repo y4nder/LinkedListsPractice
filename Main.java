@@ -4,7 +4,9 @@ public class Main {
         m.insert(1);
         m.insert(2);
         m.insert(3);
-        m.deleteAtIndex(7);
+        m.insert(4);
+        m.insert(5);
         m.show();
+        System.out.println(m.getDataAtIndex(0));
     }
 }
