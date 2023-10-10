@@ -1,39 +1,37 @@
 public class MyLinkedList {
     private Node head;
 
-    //insert (insert last)
+    //insert
     public void insert(int data){
         Node node = new Node(data);
 
         if(head == null){
             head = node;
+            return;
         }
-        else{
-            Node n = head;
-            while(n.getNext() != null){
-                n = n.getNext();
-            }
-            n.setNext(node);
+
+        Node n = head;
+        while(n.getNext()!=null){
+            n = n.getNext();
         }
+        n.setNext(node);
     }
 
-    //insert at start
+    //insertAtStart
     public void insertAtStart(int data){
         Node node = new Node(data);
-
         if(head == null){
             head = node;
+            return;
         }
-        else{
-            node.setNext(head);
-            head = node;
-        }
+        node.setNext(head);
+        head = node;
     }
 
-    //insert at index
+    //insertAtIndex
     public void insertAtIndex(int index, int data){
         Node node = new Node(data);
-        
+
         if(index == 0){
             insertAtStart(data);
             return;
@@ -41,47 +39,64 @@ public class MyLinkedList {
 
         Node n = head;
         for(int i = 0; i < index - 1; i++){
-            n = n.getNext();
+            if( (n = n.getNext()) == null ){
+                return;
+            }  
         }
-
         node.setNext(n.getNext());
         n.setNext(node);
-    }
 
+    }
     //deleteFirst
     public void deleteFirst(){
         if(head == null){
             return;
         }
-
         head = head.getNext();
     }
-
-    //delete at Index
-    public void deleteIndex(int index){
-        Node n = head;
-        if(index == 0){
-            deleteFirst();
+    //deletelast
+    public void deleteLast(){
+        if(head == null){
+            return;
         }
 
+        if(head.getNext() == null){
+            deleteFirst();
+            return;
+        }
+
+        Node n = head;
+        while(n.getNext().getNext()!=null){
+            n = n.getNext();
+        }
+        n.setNext(null);;
+    }
+    //deleteAtIndex
+    public void deleteAtIndex(int index){
+        if(index == 0){
+            deleteFirst();
+            return;
+        }
+
+        Node n = head;
+
         for(int i = 0; i < index - 1; i++){
-            if( (n = n.getNext()) == null ){
-                System.out.println("index not found");
+            if( (n = n.getNext()) == null){
                 return;
             }
         }
-
         n.setNext(n.getNext().getNext());
     }
 
-    //show all data in linkedlist
+    //show
     public void show(){
         if(head == null){
             return;
         }
+
         Node n = head;
         while(n.getNext()!=null){
-            System.out.println(n.getData());
+            System.out.print(n.getData() + " ");
             n = n.getNext();
         }
         System.out.println(n.getData());
